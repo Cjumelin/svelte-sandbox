@@ -21,17 +21,17 @@ export const actions: Actions = {
 		const password = formData.get('password');
 
 		if (!validateUsername(username)) {
-			return fail(400, { message: 'Invalid username' });
+			return { notify: true, type: 'error', message: "Invalid username" };
 		}
 		if (!validatePassword(password)) {
-			return fail(400, { message: 'Invalid password' });
+			return { notify: true, type: 'error', message: "Invalid password" };
 		}
 
 		const results = await db.select().from(table.user).where(eq(table.user.username, username));
 
 		const existingUser = results.at(0);
 		if (!existingUser) {
-			return fail(400, { message: 'Incorrect username or password' });
+			return { notify: true, type: 'error', message: "Incorrect username or password" };
 		}
 
 		const validPassword = await verify(existingUser.passwordHash, password, {
@@ -41,7 +41,7 @@ export const actions: Actions = {
 			parallelism: 1
 		});
 		if (!validPassword) {
-			return fail(400, { message: 'Incorrect username or password' });
+			return { notify: true, type: 'error', message: "Incorrect username or password" };
 		}
 
 		const sessionToken = auth.generateSessionToken();
@@ -56,10 +56,10 @@ export const actions: Actions = {
 		const password = formData.get('password');
 
 		if (!validateUsername(username)) {
-			return fail(400, { message: 'Invalid username' });
+			return { notify: true, type: 'error', message: "Invalid username" };
 		}
 		if (!validatePassword(password)) {
-			return fail(400, { message: 'Invalid password' });
+			return { notify: true, type: 'error', message: "Invalid password" };
 		}
 
 		const userId = generateUserId();
@@ -78,7 +78,7 @@ export const actions: Actions = {
 			const session = await auth.createSession(sessionToken, userId);
 			auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 		} catch (e) {
-			return fail(500, { message: e.message });
+			return { notify: true, type: 'error', message: "Please, refresh the page" };
 		}
 		return redirect(302, '/');
 	}

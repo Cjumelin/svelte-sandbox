@@ -1,0 +1,2 @@
+ALTER TABLE "habit" ALTER COLUMN "start_at" SET DATA TYPE timestamp with time zone;--> statement-breakpoint
+ALTER TABLE "habit_response" ALTER COLUMN "answered_at" SET DATA TYPE timestamp with time zone;
