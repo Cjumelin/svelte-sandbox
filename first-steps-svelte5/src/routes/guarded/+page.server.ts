@@ -2,7 +2,18 @@ import { createHabit } from '$lib/server/db/createhabit';
 import * as auth from '$lib/server/auth';
 import { fail, redirect } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
-import type { Actions } from '../$types';
+import type { Actions, PageServerData } from '../$types';
+import { gethabitByuserId } from '$lib/server/db/gethabitByUserId';
+
+export const load: PageServerData = async ({locals}) => {
+	const userId = locals?.user?.id;
+	if (!userId) {
+		return redirect(302, 'login');
+	}
+	return {
+	 habits: await gethabitByuserId(userId)
+	}
+}
 
 export const actions: Actions = {
 	createHabit: async (all) => {

@@ -5,7 +5,7 @@
 	import { writable } from 'svelte/store';
 	import type { ActionData } from '../$types';
 
-	let { form }: { form: ActionData } = $props();
+	let { data, form }: { form: ActionData } = $props();
 
 	const isModalOpen = writable(false);
 
@@ -16,6 +16,8 @@
 	function closeModal() {
 		isModalOpen.set(false);
 	}
+
+	$inspect(data);
 </script>
 
 <button onclick={openModal} class="open-modal-button"> Add New Habit </button>
