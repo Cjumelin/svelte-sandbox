@@ -5,13 +5,9 @@
 	const dispatch = createEventDispatcher();
 
 	function enhanceForm(form: HTMLFormElement) {
-		return enhance(form, async ({ action, formData }) => {
-			const response = await fetch(action, {
-				method: 'POST',
-				body: formData
-			});
-			// TODO: Handle error when deadline isn't > 5 days from now
-			if (response.ok) {
+		return enhance(form, async (all) => {
+			console.log(all);
+			if (all) {
 				dispatch('submitSuccess');
 			}
 		});
