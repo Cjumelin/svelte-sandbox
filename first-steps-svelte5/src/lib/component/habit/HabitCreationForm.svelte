@@ -14,9 +14,9 @@
 	}
 </script>
 
-<form method="POST" action="?/createHabit" use:enhanceForm class="form-container">
+<form method="POST" action="?/createHabit" use:enhanceForm>
 	<div class="form-field">
-		<label for="title" class="form-label">Title</label>
+		<label for="title" class="form-label">Title *</label>
 		<input
 			type="text"
 			id="title"
@@ -28,19 +28,19 @@
 	</div>
 
 	<div class="form-field">
+		<label for="deadline" class="form-label">Deadline *</label>
+		<input type="date" id="deadline" name="deadline" class="input-field" required />
+	</div>
+
+
+	<div class="form-field">
 		<label for="description" class="form-label">Description</label>
 		<textarea
 			id="description"
 			name="description"
 			class="input-field"
 			placeholder="A short description..."
-			required
 		></textarea>
-	</div>
-
-	<div class="form-field">
-		<label for="deadline" class="form-label">Deadline</label>
-		<input type="date" id="deadline" name="deadline" class="input-field" required />
 	</div>
 
 	<div class="form-field flex items-center">
@@ -52,10 +52,6 @@
 </form>
 
 <style>
-	.form-container {
-		@apply mx-auto max-w-lg rounded-lg bg-white p-6 shadow-md;
-	}
-
 	.form-field {
 		@apply mb-4;
 	}

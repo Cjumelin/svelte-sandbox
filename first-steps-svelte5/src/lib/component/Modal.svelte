@@ -49,6 +49,6 @@
 	}
 
 	.close-button {
-		@apply absolute right-2 top-2 text-gray-500 hover:text-gray-700;
+		@apply absolute right-2 top-2 text-gray-500 hover:text-gray-700 p-1;
 	}
 </style>
